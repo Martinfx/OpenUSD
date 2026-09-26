@@ -47,6 +47,11 @@ Garch_GLPlatformDebugWindow::Init(const char *title,
     };
 
     _display = XOpenDisplay(NULL);
+    if (!_display) {
+        TF_FATAL_ERROR("XOpenDisplay failed for display '%s'",
+                       XDisplayName(NULL));
+        exit(1);
+    }
     int screen = DefaultScreen(_display);
     Window root = RootWindow(_display, screen);
 
